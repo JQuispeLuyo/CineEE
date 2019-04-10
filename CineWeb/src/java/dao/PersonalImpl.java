@@ -13,7 +13,7 @@ public class PersonalImpl extends Conexion implements IPersonal {
     @Override
     public void regitrar(Personal personal) throws Exception {
         String sql = "insert into personal "
-                + "(nomPer, apePer, dniPer, dirPer, tipPer, sexPer, usuPer, pwdPer, codubi) "
+                + "(nomPer, apePer, dniPer,tipPer, dirPer,sexPer, usuPer, pwdPer, codubi) "
                 + "values (?,?,?,?,?,?,?,?,?)";
         
          try {
@@ -27,7 +27,6 @@ public class PersonalImpl extends Conexion implements IPersonal {
             ps.setString(7, personal.getUsuPer());
             ps.setString(8, personal.getPwdPer());
             ps.setString(9, personal.getCodubi());
-         
             ps.executeUpdate();
             ps.close();
             
@@ -91,18 +90,16 @@ public class PersonalImpl extends Conexion implements IPersonal {
     public List<Personal> listaper(Personal personal) throws Exception {
         List <Personal> listado = null;
         Personal pers;
-        String sql = "select * form personal";
+        String sql = "select * from personal";
         
          try {
             listado = new ArrayList();
-            
             Statement st = this.conectar().createStatement();
             ResultSet rs = st.executeQuery(sql);
-             
             while(rs.next()){
                  
                  pers = new Personal();
-                 pers.setIdPer(rs.getInt("inPer"));
+                 pers.setIdPer(rs.getInt("idPer"));
                  pers.setNomPer(rs.getString("nomPer"));
                  pers.setApePer(rs.getString("apePer"));
                  pers.setDniPer(rs.getString("dniPer"));
@@ -116,7 +113,7 @@ public class PersonalImpl extends Conexion implements IPersonal {
              }
             
         } catch (Exception e) {
-            
+             System.out.println("error dao");
         }finally{
           this.cerrar();
         }

@@ -20,11 +20,9 @@ public class Conexion {
     public static Connection cnx = null;
 
     public static Connection conectar() throws Exception {
-
         InputStream inputStream
                 = Conexion.class.getClassLoader().
                         getResourceAsStream("properties/db.properties");
-
         Properties properties = new Properties();
 
         try {
@@ -36,9 +34,7 @@ public class Conexion {
             String url = properties.getProperty("url");
             Class.forName(driver).newInstance();
             cnx = DriverManager.getConnection(url, user, pwd);
-            if (cnx!=null) {
-                JOptionPane.showMessageDialog(null, "Bien :D");
-            }
+            System.out.println("Entro :D");
            
         } catch (Exception e) {
             
@@ -57,8 +53,7 @@ public class Conexion {
     }
     
     public static void main(String[] args) throws Exception {
-        conectar();
-        cerrar();
+
     }
     
 }

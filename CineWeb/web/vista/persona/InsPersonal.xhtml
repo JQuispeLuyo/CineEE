@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="formIns">
+            <p:growl autoUpdate="true" showDetail="True"/>
+            <h:panelGrid columns="4">
+                <p:outputLabel value="Nombre" /><p:inputText value="#{personalC.personal.nomPer}"/>
+                <p:outputLabel value="Apellido" /><p:inputText value="#{personalC.personal.apePer}"/>
+                <p:outputLabel value="Direcion" /><p:inputText value="#{personalC.personal.dirPer}"/>
+                <p:outputLabel value="Dni" /><p:inputText value="#{personalC.personal.dniPer}"/>
+                <p:outputLabel value="Sexo" /><p:inputText value="#{personalC.personal.sexPer}"/>
+                <p:outputLabel value="Tipo" /><p:inputText value="#{personalC.personal.tipPer}"/>
+                <p:outputLabel value="Usuario" /><p:inputText value="#{personalC.personal.usuPer}"/>
+                <p:outputLabel value="Clave" /><p:inputText value="#{personalC.personal.pwdPer}"/>
+                <p:outputLabel value="Ubigeo" /><p:inputText value="#{personalC.personal.codubi}"/>
+            </h:panelGrid>
+            <p:commandButton value="Regitrar" actionListener="#{personalC.regitrar()}" update="formIns"/>
+        </h:form>
+        
+    </h:body>
+</html>
+

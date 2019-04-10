@@ -64,6 +64,15 @@ public class PersonalC implements Serializable {
         }
     }
     
+    public void listar() throws Exception {
+        try {
+            listadoPer = dao.listaper(personal);
+        } catch (Exception e) {
+            throw e;
+        }
+
+    }
+    
     public List<Personal> getListadoPer() {
         return listadoPer;
     }
@@ -71,6 +80,7 @@ public class PersonalC implements Serializable {
     public void setListadoPer(List<Personal> listadoPer) {
         this.listadoPer = listadoPer;
     }
+    
     
     public Personal getPersonal() {
         return personal;
