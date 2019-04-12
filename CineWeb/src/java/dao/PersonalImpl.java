@@ -48,8 +48,8 @@ public class PersonalImpl extends Conexion implements IPersonal {
             ps.setString(1, personal.getNomPer());
             ps.setString(2, personal.getApePer());
             ps.setString(3, personal.getDniPer());
-            ps.setInt(4, personal.getTipPer());
-            ps.setString(5, personal.getDirPer());
+            ps.setString(4, personal.getDirPer());
+            ps.setInt(5, personal.getTipPer());
             ps.setString(6, personal.getSexPer());
             ps.setString(7, personal.getUsuPer());
             ps.setString(8, personal.getPwdPer());
@@ -69,7 +69,7 @@ public class PersonalImpl extends Conexion implements IPersonal {
 
     @Override
     public void eliminar(Personal personal) throws Exception {
-        String sql = "delete personal idPer=?";
+        String sql = "delete from personal where idPer=?";
         
          try {
              

@@ -10,9 +10,12 @@
         <f:event type="preRenderView" listener="#{personalC.listar()}"/>
     </h:head>
     <h:body>
+        <p:growl autoUpdate="true" showDetail="true" id="messages"></p:growl>
         <h:form id="form">
-            <p:dataTable value="#{personalC.listadoPer}" var="lista" id="dtTable">
-                
+            <p:dataTable value="#{personalC.listadoPer}" var="lista" id="dtTable"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                        paginator="true" rows="10" style="margin-bottom:20px">
+
                 <p:column headerText="Id">
                     <h:outputText value="#{lista.idPer}"/>
                 </p:column>
@@ -40,9 +43,53 @@
                 <p:column headerText="Ubigeo">
                     <h:outputText value="#{lista.codubi}"/>
                 </p:column> 
-                
+                <p:column headerText="">
+                    <p:commandButton icon="pi-pi-clone" oncomplete="" update=""></p:commandButton>
+                </p:column>
+
+                <p:column headerText="">
+                    <p:commandButton value="modificar" 
+                                     icon="ui-icon-pencil" 
+                                     oncomplete="PF('wdlgDatos').show();" update=":dlgDatos dtTable">
+                        <f:setPropertyActionListener value="#{lista}" target="#{personalC.personal}"/>
+                    </p:commandButton>
+                    
+                    <p:commandButton value="Eliminar" icon="ui-icon-circle-close" update=":messages dtTable"
+                                     actionListener="#{personalC.eliminar(lista)}">
+                        <p:confirm header="Confirmacion" message="¿Deseas eliminar" icon="ui-icon-alert"/>
+                        <p:tooltip trackMouse="true"/>
+                    </p:commandButton>
+                    
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                    </p:confirmDialog>
+                    
+                </p:column>
+
             </p:dataTable>
-<!--            <p:commandButton value="Listar" actionListener="#{personalC.listar()}" update="form"/> -->
         </h:form>
+
+        <p:dialog id="dlgDatos" widgetVar="wdlgDatos">
+            <h:form>
+                <h:panelGrid columns="4">
+                    <p:outputLabel value="Nombre" /><p:inputText value="#{personalC.personal.nomPer}"/>
+                    <p:outputLabel value="Apellido" /><p:inputText value="#{personalC.personal.apePer}"/>
+                    <p:outputLabel value="Direcion" /><p:inputText value="#{personalC.personal.dirPer}"/>
+                    <p:outputLabel value="Dni" />
+                    <p:inputText value="#{personalC.personal.dniPer}">
+                        <p:keyFilter></p:keyFilter>
+                    </p:inputText>
+                    <p:outputLabel value="Sexo" /><p:inputText value="#{personalC.personal.sexPer}"/>
+                    <p:outputLabel value="Tipo" /><p:inputText value="#{personalC.personal.tipPer}"/>
+                    <p:outputLabel value="Usuario" /><p:inputText value="#{personalC.personal.usuPer}"/>
+                    <p:outputLabel value="Clave" /><p:inputText value="#{personalC.personal.pwdPer}"/>
+                    <p:outputLabel value="Ubigeo" /><p:inputText value="#{personalC.personal.codubi}"/>
+                </h:panelGrid>
+                <p:commandButton value="Actualizar" 
+                                 actionListener="#{personalC.modificar()}"
+                                 update=":form :messages" oncomplete="PF('wdlgDatos').hide();"></p:commandButton>
+            </h:form>
+        </p:dialog>
     </h:body>
 </html>

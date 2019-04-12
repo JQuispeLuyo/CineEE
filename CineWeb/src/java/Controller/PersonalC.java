@@ -31,6 +31,7 @@ public class PersonalC implements Serializable {
     public void regitrar () throws Exception{
         try {
             dao.regitrar(personal);
+            limpiar();
             FacesContext.getCurrentInstance().addMessage(null, 
                         new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro","Completado"));
         } catch (Exception e) {
@@ -39,27 +40,27 @@ public class PersonalC implements Serializable {
     
     public void modificar () throws Exception{
          try {
-            dao.regitrar(personal);
+            dao.modificar(personal);
+            limpiar();
             FacesContext.getCurrentInstance().addMessage(null, 
-                        new FacesMessage(FacesMessage.SEVERITY_INFO,"Actualizacio","Competado"));
+                        new FacesMessage(FacesMessage.SEVERITY_INFO,"Actualizacion","Competado"));
         } catch (Exception e) {
         }
     }
     
-    public void eliminar () throws Exception {
+    public void eliminar (Personal per) throws Exception {
          try {
-            dao.regitrar(personal);
+            dao.eliminar(per);
+            limpiar();
             FacesContext.getCurrentInstance().addMessage(null, 
-                        new FacesMessage(FacesMessage.SEVERITY_INFO,"Elimicacion","Completado"));
+                        new FacesMessage(FacesMessage.SEVERITY_INFO,"Eliminacion","Completado"));
         } catch (Exception e) {
         }
     }
     
-    public void limpiar () throws Exception{
+    public void limpiar() throws Exception{
          try {
-            dao.regitrar(personal);
-            FacesContext.getCurrentInstance().addMessage(null, 
-                        new FacesMessage(FacesMessage.SEVERITY_INFO,"Listado","Completado"));
+             
         } catch (Exception e) {
         }
     }
